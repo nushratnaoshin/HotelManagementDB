@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Suites | Urban Nest Luxury Residences</title>
+    <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@300;400;600;700&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css?v=999">
+</head>
+<body>
+
+    <header class="navbar">
+        <div class="logo-container">
+            <img src="logo.png" alt="Urban Nest" class="main-logo-lg">
+        </div>
+        <nav>
+            <ul id="nav-menu">
+                <li><a href="index.html">Dashboard</a></li>
+                <li class="active"><a href="rooms.html">Suites</a></li>
+                <li class="admin-only"><a href="customers.html">Database</a></li>
+                <li class="admin-only"><a href="services.html">Services</a></li>
+                <li><a href="payments.html">Payments</a></li>
+            </ul>
+        </nav>
+        <div class="system-access-header">
+            <span id="user-badge">SECURE ACCESS</span>
+            <a href="login.html" class="btn-logout-sm">Sign Out</a>
+        </div>
+    </header>
+
+    <section class="welcome-intro" style="padding-bottom: 20px;">
+        <h2 style="font-size: 0.7rem; letter-spacing: 4px; color: #bbb; text-transform: uppercase;">Available Residences</h2>
+        <p class="playfair-text" style="font-size: 1.1rem; margin-top: 10px;">
+            Select a suite to manage bookings or leave a resident review.
+        </p>
+    </section>
+
+    <main class="mgmt-section">
+        <div id="roomGrid" class="grid-container">
+            <p style="text-align: center; grid-column: 1/-1; color: #aaa;">Loading available suites...</p>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 URBAN NEST LUXURY SUITES • DHAKA, BANGLADESH</p>
+    </footer>
+
+    <script src="script.js?v=999"></script>
+</body>
+</html>

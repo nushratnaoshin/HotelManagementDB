@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Entry | Urban Nest Luxury Suites</title>
+    <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@300;400;600;700&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css?v=999">
+    <style>
+        .login-viewport {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), 
+                        url('https://images.unsplash.com/photo-1445019980597-93fa8acb246c?q=80&w=2000') center/cover;
+            backdrop-filter: blur(5px);
+        }
+
+        .login-card {
+            width: 100%;
+            max-width: 460px; 
+            padding: 60px;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            text-align: center;
+            box-shadow: 0 40px 100px rgba(0,0,0,0.5);
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+
+        .main-logo-lg {
+            height: 70px; /* Further refined for elegance */
+            width: auto;
+            margin-bottom: 20px;
+            filter: drop-shadow(0 5px 15px rgba(0,0,0,0.1));
+        }
+
+        .portal-subtext {
+            font-size: 0.7rem; 
+            letter-spacing: 6px; 
+            color: var(--accent-gold); 
+            margin-bottom: 40px;
+            text-transform: uppercase;
+            font-weight: 700;
+        }
+
+        .role-selector {
+            display: flex;
+            margin-bottom: 35px;
+            gap: 10px;
+        }
+
+        .role-btn {
+            flex: 1;
+            padding: 12px;
+            font-size: 0.65rem; 
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            cursor: pointer;
+            color: var(--text-gray);
+            border: 1px solid transparent;
+            background: rgba(0,0,0,0.03);
+            transition: var(--transition);
+        }
+
+        .role-btn.active {
+            color: white;
+            background: var(--primary-dark);
+            border-color: var(--primary-dark);
+        }
+
+        .login-form {
+            display: none;
+            text-align: left;
+            animation: fadeIn 0.5s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .login-form.active {
+            display: block;
+        }
+
+        .input-group label {
+            font-size: 0.6rem; 
+            font-weight: 800;
+            color: var(--primary-dark);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            display: block;
+            margin-bottom: 8px;
+            opacity: 0.5;
+        }
+
+        .btn-login-full {
+            width: 100%;
+            padding: 18px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            background: var(--primary-dark);
+            color: white;
+            border: none;
+            margin-top: 30px;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .btn-login-full:hover {
+            background: var(--accent-gold);
+            color: var(--primary-dark);
+        }
+
+        .public-link {
+            display: block;
+            margin-top: 40px;
+            font-size: 0.6rem;
+            color: var(--text-gray);
+            text-decoration: none;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            transition: var(--transition);
+        }
+
+        .public-link:hover {
+            color: var(--accent-gold);
+        }
+    </style>
+</head>
+<body class="login-viewport">
+
+    <div class="login-card">
+        <img src="logo.png" alt="Urban Nest" class="main-logo-lg">
+        <p class="portal-subtext">Residence Access Portal</p>
+
+        <div class="role-selector">
+            <button id="staff-tab" class="role-btn active" onclick="switchTab('admin')">Staff Access</button>
+            <button id="guest-tab" class="role-btn" onclick="switchTab('guest')">Resident Access</button>
+        </div>
+
+        <form id="admin-form" class="login-form active" onsubmit="handleLogin(event, 'admin')">
+            <div class="input-group">
+                <label>Staff Identification</label>
+                <input type="text" id="admin-username" class="login-field" placeholder="Username" required>
+            </div>
+            <div class="input-group" style="margin-top:15px;">
+                <label>Access Key</label>
+                <input type="text" id="admin-password" class="login-field mask-pass" placeholder="••••••••" required autocomplete="off" spellcheck="false">
+            </div>
+            <button type="submit" class="btn-login-full">Authorize Staff</button>
+        </form>
+
+        <form id="guest-form" class="login-form" onsubmit="handleLogin(event, 'guest')">
+            <div id="guest-login-fields">
+                <div class="input-group">
+                    <label>Resident Email</label>
+                    <input type="email" id="guest-email" class="login-field" placeholder="Email Address" required>
+                </div>
+                <div class="input-group" style="margin-top:15px;">
+                    <label>Password</label>
+                    <input type="text" id="guest-password" class="login-field mask-pass" placeholder="••••••••" required autocomplete="off" spellcheck="false">
+                </div>
+                <button type="submit" class="btn-login-full" style="background: #f4f4f4; color: #333; border: 1px solid #ddd;">Enter Portal</button>
+                <p style="margin-top: 25px; font-size: 0.85rem; color: #888;">
+                    Don't have an account? <a href="javascript:void(0)" onclick="toggleSignup(true)" style="color: var(--accent-gold); font-weight: 700; text-decoration: none; font-size: 0.9rem;">Create one now</a>
+                </p>
+            </div>
+
+            <div id="guest-signup-fields" style="display:none;">
+                <div class="input-group">
+                    <label>Full Name</label>
+                    <input type="text" id="reg-name" class="login-field" placeholder="Your Name">
+                </div>
+                <div class="input-group" style="margin-top:15px;">
+                    <label>Email Address</label>
+                    <input type="email" id="reg-email" class="login-field" placeholder="Email Address">
+                </div>
+                <div class="input-group" style="margin-top:15px;">
+                    <label>Phone Number</label>
+                    <input type="text" id="reg-phone" class="login-field" placeholder="Phone Number">
+                </div>
+                <div class="input-group" style="margin-top:15px;">
+                    <label>Create Password</label>
+                    <input type="text" id="reg-password" class="login-field mask-pass" placeholder="••••••••" autocomplete="off" spellcheck="false">
+                </div>
+                <button type="button" onclick="handleSignup()" class="btn-login-full" style="background: var(--accent-gold); color: white;">Initialize Resident Account</button>
+                <p style="margin-top: 25px; font-size: 0.85rem; color: #888;">
+                    Already a resident? <a href="javascript:void(0)" onclick="toggleSignup(false)" style="color: var(--primary-dark); font-weight: 700; text-decoration: none; font-size: 0.9rem;">Login instead</a>
+                </p>
+            </div>
+        </form>
+
+    </div>
+
+    <script>
+        // Clear local session on load
+        localStorage.removeItem("userRole");
+        fetch('api.php?action=logout').catch(()=>console.log('logout error'));
+
+        function switchTab(role) {
+            document.querySelectorAll('.role-btn').forEach(btn => btn.classList.remove('active'));
+            if(role === 'admin') document.getElementById('staff-tab').classList.add('active');
+            else document.getElementById('guest-tab').classList.add('active');
+
+            document.querySelectorAll('.login-form').forEach(form => form.classList.remove('active'));
+            document.getElementById(role + '-form').classList.add('active');
+            
+            // If switching to resident tab, reset the signup view
+            if(role === 'guest') toggleSignup(false);
+        }
+
+        function toggleSignup(show) {
+            document.getElementById('guest-login-fields').style.display = show ? 'none' : 'block';
+            document.getElementById('guest-signup-fields').style.display = show ? 'block' : 'none';
+        }
+
+        async function handleSignup() {
+            const name = document.getElementById('reg-name').value;
+            const email = document.getElementById('reg-email').value;
+            const phone = document.getElementById('reg-phone').value;
+            const password = document.getElementById('reg-password').value;
+
+            if (!name || !email || !password) {
+                alert('Please fill in all required fields (Name, Email, Password)');
+                return;
+            }
+
+            try {
+                let response = await fetch('api.php?action=register', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ name, email, phone, password })
+                });
+                let data = await response.json();
+                if (data.status === 'success') {
+                    localStorage.setItem("userRole", 'guest');
+                    window.location.href = 'index.html';
+                } else {
+                    alert('Registration failed: ' + data.message);
+                }
+            } catch(error) {
+                alert('Connection error');
+            }
+        }
+
+        async function handleLogin(e, role) {
+            e.preventDefault();
+            let username = role === 'admin' ? document.getElementById('admin-username').value : document.getElementById('guest-email').value;
+            let password = role === 'admin' ? document.getElementById('admin-password').value : document.getElementById('guest-password').value;
+
+            try {
+                let response = await fetch('api.php?action=login', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ role, username, password })
+                });
+                let data = await response.json();
+                console.log("Login Response Data:", data); // DEBUG
+                if (data.status === 'success') {
+                    localStorage.setItem("userRole", role);
+                    window.location.href = 'index.html';
+                } else {
+                    alert('Login failed: ' + data.message);
+                }
+            } catch(error) {
+                alert('Connection error');
+            }
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Accounting & Invoicing | Urban Nest</title>
+    <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@300;400;600;700&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css?v=999">
+    <style>
+        .invoice-card { background: white; border: 1px solid #eee; margin-bottom: 25px; padding: 30px; position: relative; }
+        .invoice-header { display: flex; justify-content: space-between; border-bottom: 2px solid #f9f9f9; padding-bottom: 15px; margin-bottom: 15px; }
+        .invoice-id { font-weight: 800; font-size: 0.9rem; color: #111; letter-spacing: 1px; }
+        .invoice-date { font-size: 0.65rem; color: #aaa; text-transform: uppercase; }
+        .guest-info h4 { font-family: var(--font-serif); font-size: 1.2rem; color: #333; margin-bottom: 5px; }
+        .suite-tag { font-size: 0.6rem; background: #333; color: white; padding: 3px 8px; text-transform: uppercase; letter-spacing: 1px; }
+        .amount-display { font-size: 1.5rem; font-weight: 800; color: #27ae60; margin-top: 15px; }
+        .paid-stamp { 
+            position: absolute; right: 30px; bottom: 30px; border: 3px solid #27ae60; color: #27ae60; 
+            padding: 5px 15px; font-weight: 900; text-transform: uppercase; transform: rotate(-15deg); 
+            opacity: 0.2; font-size: 1.2rem; pointer-events: none;
+        }
+        .pending-stamp { 
+            position: absolute; right: 30px; bottom: 30px; border: 3px solid #f1c40f; color: #f1c40f; 
+            padding: 5px 15px; font-weight: 900; text-transform: uppercase; transform: rotate(-5deg); 
+            opacity: 0.3; font-size: 1.0rem; pointer-events: none;
+        }
+        @media print { .navbar, .btn-print { display: none !important; } .invoice-card { border: 1px solid #000; } }
+    </style>
+</head>
+<body>
+
+    <header class="navbar">
+        <div class="logo-container">
+            <img src="logo.png" alt="Urban Nest" class="main-logo-lg">
+        </div>
+        <nav>
+            <ul id="nav-menu">
+                <li><a href="index.html">Dashboard</a></li>
+                <li><a href="rooms.html">Suites</a></li>
+                <li class="admin-only"><a href="customers.html">Database</a></li>
+                <li class="admin-only"><a href="services.html">Services</a></li>
+                <li class="active"><a href="payments.html">Payments</a></li>
+            </ul>
+        </nav>
+        <div class="system-access-header">
+            <span id="user-badge">SECURE ACCESS</span>
+            <a href="login.html" class="btn-logout-sm">Sign Out</a>
+        </div>
+    </header>
+
+    <section class="welcome-intro" style="padding-bottom: 20px;">
+        <h2 style="font-size: 0.7rem; letter-spacing: 4px; color: #bbb; text-transform: uppercase;">Resident Account</h2>
+        <p class="playfair-text" style="font-size: 1.1rem; margin-top: 10px;">
+            Personal statement and transaction history.
+        </p>
+    </section>
+
+    <main class="mgmt-section">
+        <div class="container" style="max-width: 800px; margin: 0 auto;">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px;">
+                <h3 style="font-family: var(--font-serif); font-size: 1.4rem;">Invoices</h3>
+                <button onclick="window.print()" class="btn-guest-sm btn-print" style="font-size: 0.55rem;">Export LEDGER</button>
+            </div>
+
+            <div id="payment-list">
+                <p style="text-align:center; padding: 40px; color: #ccc;">Checking records...</p>
+            </div>
+
+            <div id="no-data-msg" style="display: none; text-align: center; padding: 50px; background: white; border: 1px solid #eee;">
+                <p style="color: #aaa; font-style: italic;">No active records found for this account.</p>
+                <a href="rooms.html" class="btn-staff-sm" style="margin-top: 15px; display: inline-block;">Browse Available Suites</a>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 URBAN NEST LUXURY SUITES • DHAKA, BANGLADESH</p>
+    </footer>
+
+    <script src="script.js?v=999"></script>
+    <script>
+        function renderPaymentsPage() {
+            const list = document.getElementById("payment-list");
+            const noData = document.getElementById("no-data-msg");
+            // Pull from localStorage (synced by script.js)
+            const records = JSON.parse(localStorage.getItem("un_payment_records")) || [];
+
+            if (records.length === 0) {
+                list.style.display = "none";
+                noData.style.display = "block";
+                return;
+            }
+
+            list.style.display = "block";
+            noData.style.display = "none";
+
+            list.innerHTML = records.map(rec => {
+                const isPaid = rec.paymentStatus && rec.paymentStatus.toLowerCase() === 'paid';
+                const stampClass = isPaid ? 'paid-stamp' : 'pending-stamp';
+                const stampText = isPaid ? 'PAID & VERIFIED' : 'PENDING APPROVAL';
+                const isAdmin = localStorage.getItem("userRole") === 'admin';
+                
+                return `
+                <div class="invoice-card" style="position:relative; min-height:220px;">
+                    ${(!isPaid && isAdmin) ? `
+                        <button onclick="approvePayment(${rec.id})" 
+                                style="position:absolute; top:20px; right:20px; z-index:100; 
+                                       background:#27ae60; color:white; border:none; 
+                                       padding:10px 20px; font-size:0.6rem; font-weight:800; 
+                                       cursor:pointer; box-shadow:0 4px 10px rgba(0,0,0,0.2);
+                                       letter-spacing:1px; text-transform:uppercase;">
+                            APPROVE TRANSACTION
+                        </button>` : ''}
+                        
+                    <div class="invoice-header">
+                        <span class="invoice-id">#UN-${rec.id.toString().padStart(5, '0')}</span>
+                        <span class="invoice-date">Issued: ${rec.date}</span>
+                    </div>
+                    <div class="guest-info">
+                        <h4>${rec.guestName}</h4>
+                        <span class="suite-tag">${rec.suite}</span>
+                        <p style="font-size:0.7rem; color:#888; margin-top:10px;">Stay Duration: ${rec.nights} Night(s)</p>
+                    </div>
+                    <div class="amount-display">৳${rec.totalAmount.toLocaleString()}</div>
+                    <div style="margin-top:10px;">
+                        <div class="status-indicator" style="font-size:0.6rem; font-weight:bold; color:${isPaid ? '#27ae60' : '#f39c12'}">
+                            STATUS: ${rec.paymentStatus.toUpperCase()}
+                        </div>
+                    </div>
+                    <div class="${stampClass}">${stampText}</div>
+                </div>
+            `;}).join('');
+        }
+
+        // Initialize on Load
+        window.onload = () => {
+            if (typeof initApp === "function") initApp();
+            renderPaymentsPage();
+        };
+    </script>
+</body>
+</html>

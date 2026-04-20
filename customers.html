@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Resident Database | Urban Nest</title>
+    <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@300;400;600;700&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css?v=999">
+</head>
+<body>
+    <header class="navbar">
+        <div class="logo-container">
+            <img src="logo.png" alt="Urban Nest" class="main-logo-lg">
+        </div>
+        <nav>
+            <ul id="nav-menu">
+                <li><a href="index.html">Dashboard</a></li>
+                <li><a href="rooms.html">Suites</a></li>
+                <li class="active admin-only"><a href="customers.html">Database</a></li>
+                <li class="admin-only"><a href="services.html">Services</a></li>
+                <li><a href="payments.html">Payments</a></li>
+            </ul>
+        </nav>
+        <div class="system-access-header">
+            <span id="user-badge">SECURE ACCESS</span>
+            <a href="login.html" class="btn-logout-sm">Sign Out</a>
+        </div>
+    </header>
+
+    <main class="mgmt-section">
+        <div class="table-box">
+            <h2 style="font-size: 0.7rem; letter-spacing: 3px; text-transform: uppercase; margin-bottom: 30px;">Guest Database & Resident Records</h2>
+            
+            <table id="customerTable">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Resident Name</th>
+                        <th>Contact Number</th>
+                        <th>Suite</th>
+                        <th>Total Bill</th>
+                        <th>Management</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    </tbody>
+            </table>
+        </div>
+    </main>
+
+    <script src="script.js?v=999"></script>
+</body>
+</html>

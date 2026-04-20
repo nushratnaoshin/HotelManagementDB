@@ -1,0 +1,59 @@
+!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Service Config | Urban Nest</title>
+    <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@300;400;600;700&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css?v=999">
+</head>
+<body>
+    <header class="navbar">
+        <div class="logo-container">
+            <img src="logo.png" alt="Urban Nest" class="main-logo-lg">
+        </div>
+        <nav>
+            <ul id="nav-menu">
+                <li><a href="index.html">Dashboard</a></li>
+                <li><a href="rooms.html">Suites</a></li>
+                <li class="admin-only"><a href="customers.html">Database</a></li>
+                <li class="active admin-only"><a href="services.html">Services</a></li>
+                <li><a href="payments.html">Payments</a></li>
+            </ul>
+        </nav>
+        <div class="system-access-header">
+            <span id="user-badge">SECURE ACCESS</span>
+            <a href="login.html" class="btn-logout-sm">Sign Out</a>
+        </div>
+    </header>
+
+    <main class="mgmt-section">
+        <div style="max-width: 900px; margin: 0 auto;">
+            <h2 style="text-align:center; letter-spacing: 5px; color: var(--accent-gold); text-transform: uppercase; margin-bottom: 50px; font-size: 0.8rem;">Service Configuration</h2>
+
+            <div class="mgmt-card" style="margin-bottom: 40px; text-align: left;">
+                <h3 style="margin-bottom: 25px;">Add New Amenity</h3>
+                <div style="display: flex; gap: 20px;">
+                    <div style="flex: 2;">
+                        <label style="font-size: 0.6rem; font-weight: 800; color: #aaa; text-transform: uppercase; letter-spacing: 1px;">Service Name</label>
+                        <input type="text" id="svcName" class="login-field" placeholder="e.g., Private Spa Session" style="width: 100%;">
+                    </div>
+                    <div style="flex: 1;">
+                        <label style="font-size: 0.6rem; font-weight: 800; color: #aaa; text-transform: uppercase; letter-spacing: 1px;">Price (৳)</label>
+                        <input type="number" id="svcPrice" class="login-field" placeholder="0.00" style="width: 100%;">
+                    </div>
+                </div>
+                <button onclick="addService()" class="btn-staff-sm" style="margin-top: 30px; width: 100%;">Add to Management Menu</button>
+            </div>
+
+            <div class="mgmt-card" style="text-align: left;">
+                <h3 style="margin-bottom: 30px; border-bottom: 1px solid #f0f0f0; padding-bottom: 15px;">Active Amenities</h3>
+                <div id="serviceList">
+                </div>
+            </div>
+        </div>
+    </main>
+
+
+    <script src="script.js?v=999"></script>
+</body>
+</html>

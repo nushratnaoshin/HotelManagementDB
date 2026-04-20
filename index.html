@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard | Urban Nest Luxury Residences</title>
+    <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@300;400;600;700&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css?v=999">
+</head>
+<body>
+
+    <header class="navbar">
+        <div class="logo-container">
+            <img src="logo.png" alt="Urban Nest" class="main-logo-lg">
+        </div>
+        <nav>
+            <ul id="nav-menu">
+                <li class="active"><a href="index.html">Dashboard</a></li>
+                <li><a href="rooms.html">Suites</a></li>
+                <li class="admin-only"><a href="customers.html">Database</a></li>
+                <li class="admin-only"><a href="services.html">Services</a></li>
+                <li><a href="payments.html">Payments</a></li>
+            </ul>
+        </nav>
+        <div class="system-access-header">
+            <span id="user-badge">SECURE ACCESS</span>
+            <a href="login.html" class="btn-logout-sm">Sign Out</a>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="hero-content">
+            <h1>URBAN NEST</h1>
+            <p>Refined Elegance • Discrete Luxury</p>
+            <div class="scroll-indicator"></div>
+        </div>
+    </section>
+
+    <section class="welcome-intro">
+        <div class="intro-container">
+            <h2 style="font-size: 0.7rem; letter-spacing: 5px; color: var(--accent-gold); text-transform: uppercase; margin-bottom: 20px;">The Urban Experience</h2>
+            <p class="playfair-text">
+                Welcome to Urban Nest. Our management portal allows for seamless coordination of our luxury residences, ensuring every guest experiences the pinnacle of hospitality.
+            </p>
+        </div>
+    </section>
+
+    <main id="main-content" class="mgmt-section">
+        
+        <div id="staff-view" style="display:none;">
+            <h2 style="text-align:center; font-size: 0.7rem; letter-spacing: 3px; color: #bbb; margin-bottom: 40px; text-transform: uppercase;">Management Control Panel</h2>
+            <div class="grid-container">
+                <div class="mgmt-card">
+                    <h3>Guest Database</h3>
+                    <p>Add, update, or remove resident records and contact information.</p>
+                    <a href="customers.html" class="btn-staff-sm" style="margin-top:15px;">Manage Database</a>
+                </div>
+                <div class="mgmt-card">
+                    <h3>Service Config</h3>
+                    <p>Add new amenities or update pricing for existing services in ৳ (BDT).</p>
+                    <a href="services.html" class="btn-staff-sm" style="margin-top:15px;">Configure Menu</a>
+                </div>
+                <div class="mgmt-card">
+                    <h3>Suite Status</h3>
+                    <p>Monitor real-time room availability and toggle occupancy statuses.</p>
+                    <a href="rooms.html" class="btn-staff-sm" style="margin-top:15px;">Room Control</a>
+                </div>
+            </div>
+        </div>
+
+        <div id="guest-view" style="display:none;">
+            <h2 style="text-align:center; font-size: 0.7rem; letter-spacing: 3px; color: #bbb; margin-bottom: 40px; text-transform: uppercase;">Resident Services</h2>
+            <div class="grid-container">
+                <div class="mgmt-card">
+                    <h3>Book a Suite</h3>
+                    <p>Select your preferred luxury suite and customize your stay.</p>
+                    <a href="rooms.html" class="btn-staff-sm" style="margin-top:15px;">Browse Suites</a>
+                </div>
+                <div class="mgmt-card">
+                    <h3>Invoice History</h3>
+                    <p>Review your personal records and transaction details in ৳.</p>
+                    <a href="payments.html" class="btn-staff-sm" style="margin-top:15px;">View Bills</a>
+                </div>
+                <div class="mgmt-card">
+                    <h3>Submit Review</h3>
+                    <p>Share your experience and rate our service using the 5-star system.</p>
+                    <a href="rooms.html" class="btn-staff-sm" style="margin-top:15px;">Give Feedback</a>
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+    <footer>
+        <p>&copy; 2026 URBAN NEST LUXURY SUITES • DHAKA, BANGLADESH</p>
+    </footer>
+
+    <script src="script.js?v=999"></script>
+</body>
+</html>
